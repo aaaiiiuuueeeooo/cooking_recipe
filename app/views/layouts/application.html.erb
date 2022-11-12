@@ -6,11 +6,97 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+    <header>
+      <nav class="navar navar-expang-lg navber-dark bg-dark">
+        <div class="container">
+          <table class="table table-striped">
+            <tr>
+              <td>
+                <%= link_to "CookingRecipe", root_path,class: "text-white" %>
+              </td>
+
+              <% if customer_signed_in? %>
+              <td>
+                <%= link_to root_path,class: "text-white" do %>
+                Home
+                <% end %>
+              </td>
+              <td>
+                <%= link_to new_recipe_path,class: "text-white" do%>
+                新規投稿
+                <% end %>
+              </td>
+              <td>
+                <%= link_to customers_path,class: "text-white" do%>
+                マイページ
+                <% end %>
+              </td>
+              <td>
+                <%= link_to recipes_path,class: "text-white" do%>
+                投稿一覧
+                <% end %>
+              </td>
+              <td>
+                <%= link_to destroy_customer_session_path,class: "text-white", method: :delete do %>
+                ログアウト
+                <% end %>
+              </td>
+
+              <% elsif admin_signed_in? %>
+              <td>
+                <%= link_to root_path,class: "text-white" do%>
+                Home
+                <% end %>
+              </td>
+              <td>
+                <%= link_to admin_customers_path,class: "text-white" do%>
+                会員一覧
+                <% end %>
+              </td>
+              <td>
+                <%= link_to admin_recipes_path,class: "text-white" do%>
+                投稿一覧（管理者）
+                <% end %>
+              </td>
+              <td>
+                <%= link_to destroy_admin_session_path,class: "text-white", method: :delete do %>
+                ログアウト
+                <% end %>
+              </td>
+              <td>
+
+              </td>
+              <% else %>
+              <td>
+                <%= link_to root_path,class: "text-white" do%>
+                Home
+                <% end %>
+              </td>
+              <td>
+                <%= link_to new_customer_registration_path,class: "text-white" do %>
+                新規登録
+                <% end %>
+              </td>
+              <td>
+                <%= link_to new_customer_session_path,class: "text-white" do %>
+                ログイン
+                <% end %>
+              </td>
+              <td>
+
+              </td>
+              <% end %>
+            </tr>
+
+          </table>
+        </div>
+      </nav>
+    </header>
     <%= yield %>
   </body>
 </html>
