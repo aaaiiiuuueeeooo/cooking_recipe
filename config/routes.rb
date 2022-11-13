@@ -14,6 +14,7 @@ end
 scope module: :public do
 root to: 'homes#top'
   get 'homes/top'
+  get 'customers/index_bookmark'
   resources :customers
   resources :homes
   resources :recipes

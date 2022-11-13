@@ -1,0 +1,18 @@
+<h1>会員一覧画面（管理者）</h1>
+<table>
+  <thead>
+    <tr>
+      <td>会員名</td>
+      <td>メールアドレス</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% @customers.each do |customer| %>
+    <tr>
+      <td><%= customer.screen_name %></td>
+      <td><%= customer.email %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
