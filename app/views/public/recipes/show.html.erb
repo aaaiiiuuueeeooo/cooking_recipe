@@ -1,4 +1,18 @@
 <h1>投稿詳細画面</h1>
 <%= @recipe.recipe_name %>
-
-<%= link_to "削除",@recipe, method: :delete %>
+<%= @recipe.introduction %>
+<% if @recipe.customer == current_customer %>
+    <td><%= link_to "編集", edit_recipe_path %></td>
+    <td><%= link_to "削除", recipe_path, method: :delete %></td>
+<% else %>
+    <td></td>
+    <td></td>
+<% end %>
+<%= form_with model:[@recipe] do |f| %>
+    <%= f.text_area :comment %>
+    <%= f.submit '送信' %>
+<% end %>
+<% @comments.each do |comment| %>
+<%= comment.user_name %>
+<%= comment.comment %>
+<% end %>
