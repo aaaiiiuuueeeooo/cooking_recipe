@@ -8,11 +8,11 @@
     <td></td>
     <td></td>
 <% end %>
-<%= form_with model:[@recipe] do |f| %>
-    <%= f.text_area :comment %>
+<%= form_with model:[@comment] do |f| %>
+    <%= f.text_area :body %>
+    <%= f.hidden_field :recipe_id, :value => @recipe.id %>
     <%= f.submit '送信' %>
 <% end %>
 <% @comments.each do |comment| %>
-<%= comment.user_name %>
-<%= comment.comment %>
+<%= comment.body %>
 <% end %>

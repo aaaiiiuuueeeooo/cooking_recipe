@@ -18,6 +18,7 @@ root to: 'homes#top'
   resources :customers
   resources :homes
   resources :recipes
+  resources :comments
 
 end
   namespace :admin do

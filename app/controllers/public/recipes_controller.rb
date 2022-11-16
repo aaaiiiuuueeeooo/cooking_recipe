@@ -9,16 +9,9 @@ class Public::RecipesController < ApplicationController
     end
 
     def create
-        @recipe = Recipe.find(params[:recipe_id])
-        @comment = @recipe.comments.new(comment_params)
-        @recipe.customer_id = current_customer.id
-        if @recipe.save
-            redirect_to request.referer
-        else
-            @recipe = Recipe.new
-            @comments = @recipe.comments
-            redirect_to recipes_path
-        end
+        @recipe = Recipe.new(recipe_params)
+        @recipe.save
+        redirect_to recipes_path
     end
 
 
@@ -51,8 +44,5 @@ class Public::RecipesController < ApplicationController
         params.require(:recipe).permit(:image,:recipe_name,:introduction)
     end
 
-    def comment_params
-        params.require(:recipe).permit(:comment)
-    end
 
 end
