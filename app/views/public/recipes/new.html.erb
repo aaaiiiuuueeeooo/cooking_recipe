@@ -1,6 +1,10 @@
 <h1>新規投稿画面</h1>
 <%= form_with model: @recipe,url: recipes_path, method: :post, local: true do |f| %>
-
+<% if @recipe.errors.present? %>
+    <% @recipe.errors.each do |error| %>
+        <p><%= error.message %></p>
+    <% end %>
+<% end %>
 <p><%= f.label :image, '画像' %><br>
 <%= f.file_field :image, accept: "image/*" %>
 </p>

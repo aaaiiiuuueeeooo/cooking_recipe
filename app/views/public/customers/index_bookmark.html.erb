@@ -1,1 +1,27 @@
-<h1>いいね（ブックマーク）</h1>
+<table>
+    <caption>いいね（ブックマーク）</caption>
+    <thead>
+        <tr>
+            <th>レシピ名</th>
+            <th>投稿者名</th>
+            <th>タグ</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @bookmarks.each do |bookmark| %>
+        <tr>
+            <td>
+                <%= link_to recipe_path(bookmark.recipe) do %>
+                <%= bookmark.recipe.recipe_name %>
+                <% end %>
+            </td>
+            <td>
+                <%= bookmark.customer.screen_name %>
+            </td>
+            <td>
+                 <!--bookmark.recipe.tag-->
+            </td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>

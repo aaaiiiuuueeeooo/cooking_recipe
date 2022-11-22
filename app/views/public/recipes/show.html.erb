@@ -13,6 +13,11 @@
     <%= f.hidden_field :recipe_id, :value => @recipe.id %>
     <%= f.submit '送信' %>
 <% end %>
+<% if @recipe.bookmarked_by?(current_customer) %>
+<td><%= link_to "ブックマークを外す", recipe_bookmarks_path(@recipe), method: :delete %></td>
+<% else %>
+<td><%= link_to "ブックマーク", recipe_bookmarks_path(@recipe), method: :post %></td>
+<% end %>
 <% @comments.each do |comment| %>
 <%= comment.body %>
 <% end %>

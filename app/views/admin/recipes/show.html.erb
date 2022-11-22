@@ -1,0 +1,9 @@
+<%= @recipe.recipe_name %>
+<%= @recipe.introduction %>
+<% if @recipe.customer == current_customer %>
+    <td><%= link_to "編集", edit_recipe_path %></td>
+    <td><%= link_to "削除", recipe_path, method: :delete %></td>
+<% else %>
+    <td></td>
+    <td></td>
+<% end %>

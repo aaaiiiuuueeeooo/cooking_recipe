@@ -8,7 +8,7 @@ class Public::CommentsController < ApplicationController
     @comment.body = params[:comment][:body]
     @comment.save!
 
-    redirect_to recipes_path
+    redirect_to request.referer
 
   end
 end

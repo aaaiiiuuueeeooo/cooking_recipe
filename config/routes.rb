@@ -17,7 +17,15 @@ root to: 'homes#top'
   get 'customers/index_bookmark'
   resources :customers
   resources :homes
-  resources :recipes
+  resources :recipes do
+    resources :recipe_names
+      collection do
+        get 'keyword_search'
+      end
+  end
+  resources :recipes, except: [:index] do
+    resource :bookmarks, only: [:create, :destroy]
+  end
   resources :comments
 
 end

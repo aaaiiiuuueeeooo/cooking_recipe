@@ -1,0 +1,8 @@
+<h1>検索結果 "<%= @keyword %>"</h1>
+<ul>
+    <% @recipes.each do |recipe| %>
+    <li>
+        <%= link_to recipe.recipe_name, recipe_path(recipe.id) %>
+    </li>
+    <% end %>
+</ul>

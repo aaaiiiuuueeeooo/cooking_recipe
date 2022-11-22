@@ -9,9 +9,12 @@ class Public::RecipesController < ApplicationController
     end
 
     def create
-        @recipe = Recipe.new(recipe_params)
-        @recipe.save
-        redirect_to recipes_path
+        @recipe = current_customer.recipes.new(recipe_params)
+        if @recipe.save
+            redirect_to recipes_path
+        else
+            render :new
+        end
     end
 
 
@@ -36,6 +39,15 @@ class Public::RecipesController < ApplicationController
         @recipe = Recipe.find(params[:id])
         @recipe.destroy
         redirect_to recipes_path
+    end
+
+    def keyword_search
+        if params[:keyword].present?
+            @recipes = Recipe.where('recipe_name LIKE ?', "%#{params[:keyword]}%")
+            @keyword = params[:keyword]
+        else
+            @recipes = Recipe.all
+        end
     end
 
     private

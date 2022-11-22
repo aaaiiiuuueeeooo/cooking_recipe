@@ -5,6 +5,7 @@ class Customer < ApplicationRecord
          :recoverable, :rememberable, :validatable
     has_many :recipes
     has_many :comments
+    has_many :bookmarks, dependent: :destroy
     def self.guest
       find_or_create_by!(email: 'guest@example.com') do |user|
         customer.password = SecureRandom.urlsafe_base64
