@@ -1,23 +1,73 @@
-<h1>投稿詳細画面</h1>
-<%= @recipe.recipe_name %>
-<%= @recipe.introduction %>
-<% if @recipe.customer == current_customer %>
-    <td><%= link_to "編集", edit_recipe_path %></td>
-    <td><%= link_to "削除", recipe_path, method: :delete %></td>
-<% else %>
-    <td></td>
-    <td></td>
-<% end %>
-<%= form_with model:[@comment] do |f| %>
-    <%= f.text_area :body %>
-    <%= f.hidden_field :recipe_id, :value => @recipe.id %>
-    <%= f.submit '送信' %>
-<% end %>
-<% if @recipe.bookmarked_by?(current_customer) %>
-<td><%= link_to "ブックマークを外す", recipe_bookmarks_path(@recipe), method: :delete %></td>
-<% else %>
-<td><%= link_to "ブックマーク", recipe_bookmarks_path(@recipe), method: :post %></td>
-<% end %>
-<% @comments.each do |comment| %>
-<%= comment.body %>
-<% end %>
+<div class = "conteiner">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-9">
+            <h1>投稿詳細画面</h1>
+            <table>
+                <thead></thead>
+                <tbody>
+                    <tr>
+                        <td>レシピ名</br>
+                            <%= @recipe.recipe_name %></td>
+                    </tr>
+                    <tr>
+                        <td>レシピ詳細</br>
+                        <%= @recipe.introduction %></td>
+                    </tr>
+
+
+                    <% if @recipe.customer == current_customer %>
+                    <tr>
+                        <td><%= link_to "編集", edit_recipe_path %></td>
+                        <td><%= link_to "削除", recipe_path, method: :delete %></td>
+                        <% else %>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <% end %>
+                    </tr>
+                </tbody>
+            </table>
+                    コメント
+                    <%= form_with model:[@comment] do |f| %>
+                        <%= f.text_area :body %>
+                        <%= f.hidden_field :recipe_id, :value => @recipe.id %>
+                        <%= f.submit '送信' %>
+                    <% end %>
+
+
+
+                            <% if @recipe.bookmarked_by?(current_customer) %>
+                            <td><%= link_to "ブックマークを外す", recipe_bookmarks_path(@recipe), method: :delete %></td>
+                            <% else %>
+                            <td><%= link_to "ブックマーク", recipe_bookmarks_path(@recipe), method: :post %></td>
+                            <% end %>
+
+                            <% @recipe.tags.each do |tag| %>
+                                <span><%= tag.name %></span>
+                            <% end %>
+                        <table>
+                            <thead></thead>
+                            <tbody>
+                                <tr>
+                                    <% @comments.each do |comment| %>
+
+                                       <tr><th><%= comment.body %></th></tr>
+                                    <% end %>
+
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+</div>

@@ -1,15 +1,30 @@
-<h1>投稿一覧画面</h1>
-<%= form_with url: keyword_search_recipes_path, local: true, method: :get do |form| %>
-    <%= form.text_field :keyword %>
-    <%= form.submit "キーワード検索" %>
-<% end %>
-<% @recipes.each do |recipe| %>
-<p>
-    <%= link_to recipe.recipe_name, recipe_path(recipe.id) %>
-</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-9">
+            <h1>投稿一覧画面</h1>
+            <%= form_with url: keyword_search_recipes_path, local: true, method: :get do |form| %>
+                <%= form.text_field :keyword %>
+                <%= form.submit "キーワード検索" %>
+            <% end %>
 
-<p>
-    <%= recipe.introduction %>
-</p>
+            <%= form_with url: recipes_path, lical: true, method: :get do |form| %>
+                <% Tag.all.each do |t| %>
+                    <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
+                <% end %>
+                <%= submit_tag 'タグ検索' %>
+            <% end %>
 
-<% end %>
+            <% @recipes.each do |recipe| %>
+            <p>
+                <%= link_to recipe.recipe_name, recipe_path(recipe.id) %>
+            </p>
+
+            <p>
+                <%= recipe.introduction %>
+            </p>
+
+            <% end %>
+        </div>
+    </div>
+</div>

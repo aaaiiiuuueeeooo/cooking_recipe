@@ -1,2 +1,21 @@
-TOPページ
-<%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post %>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-50">　</div>
+  </div>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">このサイトは色々なレシピを閲覧できるサイトです。</div>
+    <div class="col-md-4"></div>
+  </div>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+    <% if customer_signed_in? %>
+      <%= %>
+    <% else %>
+      <%= link_to 'ゲストログイン（閲覧用）', customers_guest_sign_in_path, method: :post %>
+    <% end %>
+    </div>
+    <div class="col-md-4"></div>
+  </div>
+</div>

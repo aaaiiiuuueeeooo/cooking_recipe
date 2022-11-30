@@ -1,20 +1,24 @@
-<h1>会員情報編集</h1>
-<table>
-    <thead>
-        <tr>
-            <td>ハンドルネーム</td>
-            <td>メールアドレス</td>
-
-        </tr>
-    </thead>
-    <tbody>
-        <%= form_with model: @customer,url: customer_path, method: :patch, local: true do |form| %>
-       <tr>
-           <td><%= form.text_field :screen_name %></td>
-           <td><%= form.text_field :email %></td>
-
-       </tr>
-       <%= form.submit '変更を保存' %>
-       <% end %>
-    </tbody>
-</table>
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-9">
+            <h1>会員情報編集</h1>
+            <table>
+                <thead></thead>
+                <tbody>
+                    <%= form_with model: @customer,url: customer_path, method: :patch, local: true do |form| %>
+                    <tr>
+                       <td>ハンドルネーム</td><td><%= form.text_field :screen_name %></td>
+                    </tr>
+                    <tr>
+                      <td>メールアドレス</td><td><%= form.text_field :email %></td>
+                    </tr>
+                    <tr>
+                        <td><%= form.submit '変更を保存' %></td>
+                    </tr>
+                   <% end %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

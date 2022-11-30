@@ -2,6 +2,15 @@ class Public::RecipesController < ApplicationController
     def index
         @recipe = Recipe.new
         @recipes = Recipe.all
+        if params[:tag_ids]
+            @recipes = []
+            params[:tag_ids].each do |key, value|
+                if value == "1"
+                    tag_recipes = Tag.find_by(name: key).recipes
+                    @recipes = @recipes.empty? ? tag_recipes : @recipes & tag_recipes
+                end
+            end
+        end
     end
 
     def new
@@ -10,7 +19,7 @@ class Public::RecipesController < ApplicationController
 
     def create
         @recipe = current_customer.recipes.new(recipe_params)
-        if @recipe.save
+        if @recipe.save!
             redirect_to recipes_path
         else
             render :new
@@ -53,7 +62,7 @@ class Public::RecipesController < ApplicationController
     private
 
     def recipe_params
-        params.require(:recipe).permit(:image,:recipe_name,:introduction)
+        params.require(:recipe).permit(:image,:recipe_name,:introduction, tag_ids:[])
     end
 
 
