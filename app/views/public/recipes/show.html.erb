@@ -3,12 +3,13 @@
         <div class="col-md-3"></div>
         <div class="col-md-9">
             <h1>投稿詳細画面</h1>
+            <%= image_tag @recipe.get_image, size: "300x300" %>
             <table>
                 <thead></thead>
                 <tbody>
                     <tr>
                         <td>レシピ名</br>
-                            <%= @recipe.recipe_name %></td>
+                        <%= @recipe.recipe_name %></td>
                     </tr>
                     <tr>
                         <td>レシピ詳細</br>
